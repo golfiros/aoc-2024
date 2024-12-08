@@ -28,13 +28,6 @@ int main(int argc, char **argv) {
     while ((p = strtok(NULL, " ")))
       x[n++] = atoi(p);
     a += t * f(t, n - 1, x);
-    /*
-    long long st[256] = {t};
-    int sn[256] = {n - 1}, sr[256], sp = 1;
-    while (sp) {
-    }
-    a += t * sr[0];
-    */
     b += t * g(t, n - 1, x);
   }
   printf("total correct: %lld\n", a);
