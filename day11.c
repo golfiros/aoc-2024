@@ -56,10 +56,9 @@ static inline struct n {
 
 int main(int argc, char **argv) {
   int i;
-  long long m = 0, n = 0;
   struct n *s = NULL, *t = NULL;
   while (scanf(" %d", &i) > 0)
-    g(&s, i)->v++, n++;
+    g(&s, i)->v++;
 
   long long l[8] = {1};
   long long h[4] = {1};
@@ -68,6 +67,7 @@ int main(int argc, char **argv) {
   for (i = 1; i < 4; i++)
     h[i] = 10 * l[7] * h[i - 1];
 
+  long long m = 0, n = 0;
   for (int b = 0; b < 75; b++) {
     T(s, x, {
       if (!x->v)
@@ -91,13 +91,13 @@ int main(int argc, char **argv) {
       long long p = l[d & 0b111] * h[d >> 3];
       g(&t, x->k % p)->v += v;
       g(&t, x->k / p)->v += v;
-      n += v;
     });
     struct n *u = t;
     t = s;
     s = u;
   }
-  T(s, x, free(x));
+  T(s, x, n += x->v; free(x));
+  T(t, x, free(x));
   printf("25 blinks: %lld\n", m);
   printf("75 blinks: %lld\n", n);
 }
