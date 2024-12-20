@@ -1,22 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define CC(p, s) p##s
+#define C(p, s) CC(p, s)
+#define V(p) C(p##_, __LINE__)
 #define T(t, x, _)                                                             \
   do {                                                                         \
     if (!t)                                                                    \
       break;                                                                   \
-    struct n *s_##__LINE__[4096] = {t->r, t}, *x = t->l;                       \
-    int p_##__LINE__ = 2;                                                      \
-    while (p_##__LINE__) {                                                     \
+    struct n *V(s)[4096] = {t->r, t}, *x = t->l;                               \
+    int V(p) = 2;                                                              \
+    while (V(p)) {                                                             \
       while (x) {                                                              \
         if (x->r)                                                              \
-          s_##__LINE__[p_##__LINE__++] = x->r;                                 \
-        s_##__LINE__[p_##__LINE__++] = x;                                      \
+          V(s)[V(p)++] = x->r;                                                 \
+        V(s)[V(p)++] = x;                                                      \
         x = x->l;                                                              \
       }                                                                        \
-      x = s_##__LINE__[--p_##__LINE__];                                        \
-      if (p_##__LINE__ && x->r && s_##__LINE__[p_##__LINE__ - 1] == x->r) {    \
-        s_##__LINE__[p_##__LINE__ - 1] = x;                                    \
+      x = V(s)[--V(p)];                                                        \
+      if (V(p) && x->r && V(s)[V(p) - 1] == x->r) {                            \
+        V(s)[V(p) - 1] = x;                                                    \
         x = x->r;                                                              \
       } else {                                                                 \
         do {                                                                   \
