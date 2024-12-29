@@ -2,6 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define CC(p, s) p##s
+#define C(p, s) CC(p, s)
+#define V(p) C(p##_, __LINE__)
+#define T(t, x, _)                                                             \
+  do {                                                                         \
+    if (!t)                                                                    \
+      break;                                                                   \
+    struct n *V(s)[4096] = {t->r, t}, *x = t->l;                               \
+    int V(p) = 2;                                                              \
+    while (V(p)) {                                                             \
+      while (x) {                                                              \
+        if (x->r)                                                              \
+          V(s)[V(p)++] = x->r;                                                 \
+        V(s)[V(p)++] = x;                                                      \
+        x = x->l;                                                              \
+      }                                                                        \
+      x = V(s)[--V(p)];                                                        \
+      if (V(p) && x->r && V(s)[V(p) - 1] == x->r) {                            \
+        V(s)[V(p) - 1] = x;                                                    \
+        x = x->r;                                                              \
+      } else {                                                                 \
+        do {                                                                   \
+          _;                                                                   \
+        } while (0);                                                           \
+        x = NULL;                                                              \
+      }                                                                        \
+    }                                                                          \
+  } while (0)
+
 static inline struct n {
   const char *k;
   long long v;
@@ -72,6 +101,7 @@ int main(int argc, char **argv) {
     u += g(&r, str)->v;
     n += g(&r, str)->v > 0;
   }
+  T(r, x, free(x));
   printf("total feasible: %d\n", n);
   printf("total ways: %lld\n", u);
 }

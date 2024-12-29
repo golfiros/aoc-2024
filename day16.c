@@ -172,32 +172,6 @@ int main(int argc, char **argv) {
     }
   }
   T(t, x, free(x));
-  /*
-  int ss[1024] = {}, su[1024] = {u}, sv[1024] = {v}, sd[1024] = {};
-  int sp[1024] = {}, sk[1024] = {}, p = 1, b[256][256] = {};
-  b[u][v] = b[u0][v0] = 1;
-  while (p) {
-    int s = ss[--p];
-    if (s > c)
-      continue;
-    int u = su[p], v = sv[p], d = sd[p];
-    if (u == u0 && v == v0)
-      for (int i = sp[p]; i > 0; i = sp[i])
-        b[su[i]][sv[i]] = 1;
-    else if (!sk[p]) {
-      int q = p;
-      sk[p++] = 1;
-      for (int i = 3; i <= 5; i++) {
-        int r = (d + i) % 4;
-        int un = u + (int[]){1, 0, -1, 0}[r], vn = v + (int[]){0, 1, 0, -1}[r];
-        if (!m[un][vn]) {
-          ss[p] = s + (r != d ? 1001 : 1);
-          su[p] = un, sv[p] = vn, sd[p] = r, sp[p] = q, sk[p++] = 0;
-        }
-      }
-    }
-  }
-    */
   c = 0;
   for (int j = 0; j < y; j++)
     for (int i = 0; i < x; i++)
