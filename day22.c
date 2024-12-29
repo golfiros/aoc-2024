@@ -82,9 +82,8 @@ int main(int argc, char **argv) {
       p0 = p1;
       if (i >= 3) {
         struct n *n = g(&t, d);
-        if (!n->t) {
+        if (!n->t)
           n->t = 1, n->v += p0;
-        }
       }
     }
     T(t, x, x->t = 0);

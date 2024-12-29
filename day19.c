@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
     u += g(&r, str)->v;
     n += g(&r, str)->v > 0;
   }
-  T(r, x, free(x));
+  T(r, x, free((void *)x->k); free(x));
   printf("total feasible: %d\n", n);
   printf("total ways: %lld\n", u);
 }
